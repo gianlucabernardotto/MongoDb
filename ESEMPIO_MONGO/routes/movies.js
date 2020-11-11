@@ -30,7 +30,6 @@ router.get('/list/:num', function (req, res, next) {
         collection.find().limit(num).toArray((err, result) => {
             if (err) console.log(err.message); //Se c'è qualche errore lo stampo
             else {
-                console.log(result);
                 res.send(result);
             }
             client.close(); //Quando ho terminato la find chiudo la sessione con il db
