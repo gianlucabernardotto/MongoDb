@@ -26,6 +26,23 @@ export class AppComponent {
   photoURL(urltoSanitize) {
     console.log(urltoSanitize);
     return this.sanitizer.bypassSecurityTrustUrl(urltoSanitize);
+
 }
-}
+    RoMovies()
+    {
+      this.obs = this.http.get("https://3000-dc4d878f-b2ef-48ad-ad14-1f2fc8ae6984.ws-eu01.gitpod.io/movies/genere/Romance");
+      this.obs.subscribe(this.getData);
+    }
+
+   HyMovies()
+    {
+      this.obs = this.http.get("https://3000-dc4d878f-b2ef-48ad-ad14-1f2fc8ae6984.ws-eu01.gitpod.io/movies/genere/History");
+      this.obs.subscribe(this.getData);
+    }
+
+    HoMovies()
+    {
+      this.obs = this.http.get("https://3000-dc4d878f-b2ef-48ad-ad14-1f2fc8ae6984.ws-eu01.gitpod.io/movies/genere/Horror");
+      this.obs.subscribe(this.getData);
+    }}
 

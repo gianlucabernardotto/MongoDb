@@ -56,6 +56,23 @@ router.get('/movie_from_year/:year', function (req, res, next) {
     });
 });
 
+router.get('/genere/:genere', function (req, res, next) {
+    console.log(req.params); //Leggo i parametri passati all'url
+    genere = [req.params.genere];
+    const uri = "mongodb+srv://Giangy:Gianluca@cluster0.mpo20.mongodb.net/test"
+    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+    client.connect(err => {
+        const collection = client.db("sample_mflix").collection("movies"); //Mi connetto alla collection movies
+        // eseguo una find sulla collection
+        collection.find({ genres: {$in:genere} }).limit(10).toArray((err, result) => {
+            if (err) console.log(err.message); //Se c'è qualche errore lo stampo
+            else res.send(result);
+            client.close(); //Quando ho terminato la find chiudo la sessione con il db
+        }); //Eseguo la query e passo una funzione di callback
+
+    });
+});
+
 router.get('/movie_from_rating/:rating', function (req, res, next) {
    
     console.log(req.params); //Leggo i parametri passati all'url
